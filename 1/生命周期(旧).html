@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="test"></div>
+
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Count extends React.Component {
+        //构造器
+        constructor(props) {
+          console.log("Count-constructor");
+          super(props)
+          //初始化状态
+          this.state = {
+            count: 0,
+          };
+        }
+
+        //add事件
+        add = () => {
+          const { count } = this.state;
+          this.setState({ count: count + 1 });
+        }
+        //卸载组件
+         deth=() => {
+           ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+         }
+        //组件将要挂载的钩子
+        componentWillMount(){
+            console.log('Count-componentWillMount :>> ', 'Count-componentWillMount');
+        }
+        //组件挂载完毕
+        componentDidMount(){
+          console.log('Count-componentDidMount :>> ', 'Count-componentDidMount');
+
+        }
+        //组件将要卸载 的钩子
+        componentWillUnmount(){
+          console.log('componentWillUnmount :>> ', 'Count-componentWillUnmount');
+        }
+        //组件是不是要改变（控制组件是不是要更新的阀门 true 继续 false都结束
+        shouldComponentUpdate(){
+          console.log('shouldComponentUpdate :>> ', 'Count-shouldComponentUpdate');
+          return true
+        }
+        //组件将要被更新
+        componentWillUpdate(){
+          console.log('componentWillUpdate','Count-componentWillUpdate')
+        }
+        //组件更新完毕
+        componentDidUpdate(){
+          console.log('componentDidUpdate :>> ', 'Count-componentDidUpdate');
+        }
+        
+
+        render() {
+          //先走render再走componentDidMount
+          console.log('Count-render :>> ',' Count-render')
+          const { count } = this.state;
+
+          return (
+            <div>
+              <h2>当前求和为：{count}</h2>
+              <button onClick={this.add}>点我加1</button>
+              <button onClick={this.deth}>卸载</button>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<Count />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
