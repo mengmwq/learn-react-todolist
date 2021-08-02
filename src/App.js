@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component ,lazy,Suspense} from 'react';
 import { Route } from 'react-router-dom'
-import Home from './components/Home'
-import About from './components/About'
+// import Home from './components/Home'
+// import About from './components/About
 import MyNavLink from './components/MyNavLink'
 import Count from './components/Count'
+const Home = lazy(()=> import  ('./components/Home'))
+const About = lazy(()=>import ('./components/About'))
+
+
 
 export default class App extends Component {
   render() {
@@ -33,8 +37,11 @@ export default class App extends Component {
                 <div className="panel-body">
                   <h3>
                     {/* 注册路由 */}
+                    <Suspense fallback={<div>loading</div>}>
                     <Route path="/about" component={About} ></Route>
                     <Route path="/home" component={Home}></Route>
+                    </Suspense>
+                   
                   </h3>
                 </div>
               </div>
