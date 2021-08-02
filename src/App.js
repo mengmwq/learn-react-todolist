@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { NavLink, Route, BrowserRouter } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Home from './components/Home'
 import About from './components/About'
 import MyNavLink from './components/MyNavLink'
+import Count from './components/Count'
 
 export default class App extends Component {
   render() {
@@ -20,7 +21,7 @@ export default class App extends Component {
                 {/* <a className="list-group-item active" href="./about.html">About</a>
               <a className="list-group-item" href="./home.html">Home</a> */}
                 {/* 点那个就添加高亮效果  activeClassName*/}
-                
+
                 <MyNavLink to="/about" title="About">About</MyNavLink>
                 <MyNavLink to="/home" title="Home">Home</MyNavLink>
 
@@ -34,15 +35,18 @@ export default class App extends Component {
                     {/* 注册路由 */}
                     <Route path="/about" component={About} ></Route>
                     <Route path="/home" component={Home}></Route>
-
-
-
                   </h3>
                 </div>
               </div>
             </div>
+
+            <div className="col-xs-2 col-xs-offset-2"> 
+               <Count />
+            </div>
           </div>
         </div>
+
+
       </div >
     );
   }
